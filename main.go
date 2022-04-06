@@ -27,11 +27,7 @@ func main() {
 	bookRepository := book.NewRepository(db)
 	bookService := book.NewService(bookRepository)
 
-	bookRequest := book.BookRequest{
-		Title: "Gundam",
-		Price: "200000",
-	}
-	bookService.Create(bookRequest)
+	bookHandler := handler.NewBookHandler(bookService)
 
 	// Calling name repository
 	// bookRepository := book.NewRepository(db)
@@ -152,16 +148,16 @@ func main() {
 	// Versioning Route
 	v1 := router.Group("/v1")
 
-	v1.GET("/", handler.RootHandler)
-	v1.GET("/hello", handler.HelloHandler)
+	v1.GET("/", bookHandler.RootHandler)
+	v1.GET("/hello", bookHandler.HelloHandler)
 	// Get by id parameter
-	v1.GET("/books/:id", handler.BooksHandler)
-	v1.GET("/books/:id/:title", handler.BooksHandler2)
+	v1.GET("/books/:id", bookHandler.BooksHandler)
+	v1.GET("/books/:id/:title", bookHandler.BooksHandler2)
 	// Get by parameter query
-	v1.GET("/query", handler.QueryHandler)
-	v1.GET("/query2", handler.QueryHandler2)
+	v1.GET("/query", bookHandler.QueryHandler)
+	v1.GET("/query2", bookHandler.QueryHandler2)
 	// Post Data
-	v1.POST("/books", handler.PostBooksHandler)
+	v1.POST("/books", bookHandler.PostBooksHandler)
 
 	router.Run()
 }
