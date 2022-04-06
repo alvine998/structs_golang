@@ -3,6 +3,7 @@ package handler
 import (
 	"fmt"
 	"net/http"
+	"strconv"
 	"structs/book"
 
 	"github.com/gin-gonic/gin"
@@ -17,6 +18,7 @@ func NewBookHandler(bookService book.Service) *bookHandler {
 	return &bookHandler{bookService}
 }
 
+// Control find all
 func (h *bookHandler) GetBooks(ctx *gin.Context) {
 	books, err := h.bookService.FindAll()
 	if err != nil {
@@ -45,10 +47,29 @@ func (h *bookHandler) GetBooks(ctx *gin.Context) {
 	})
 }
 
-func (h *bookHandler) HelloHandler(ctx *gin.Context) {
+// Control find by id
+func (h *bookHandler) GetBook(ctx *gin.Context) {
+	idString := ctx.Param("id")
+	id, _ := strconv.Atoi(idString)
+	b, err := h.bookService.FindByID(id)
+	if err != nil {
+		ctx.JSON(http.StatusBadRequest, gin.H{
+			"errors": err,
+		})
+		return
+	}
+
+	bookResponse := book.BookResponse{
+		ID:          b.ID,
+		Title:       b.Title,
+		Price:       b.Price,
+		Description: b.Description,
+		Rating:      b.Rating,
+		Discount:    b.Discount,
+	}
+
 	ctx.JSON(http.StatusOK, gin.H{
-		"title":    "Hello World",
-		"subtitle": "Balajar golang bareng agung setiawan",
+		"data": bookResponse,
 	})
 }
 

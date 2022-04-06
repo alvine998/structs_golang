@@ -149,11 +149,8 @@ func main() {
 	v1 := router.Group("/v1")
 
 	v1.GET("/books", bookHandler.GetBooks)
-	v1.GET("/hello", bookHandler.HelloHandler)
-	// Get by id parameter
-	v1.GET("/books/:id", bookHandler.BooksHandler)
+	v1.GET("/books/:id", bookHandler.GetBook)
 	v1.GET("/books/:id/:title", bookHandler.BooksHandler2)
-	// Get by parameter query
 	v1.GET("/query", bookHandler.QueryHandler)
 	v1.GET("/query2", bookHandler.QueryHandler2)
 	// Post Data
