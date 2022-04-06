@@ -11,5 +11,12 @@ type BookRequest struct {
 	Description string      `json:"description" binding:"required"`     //Validation not null / empty
 	Rating      json.Number `json:"rating" binding:"required,number"`   //Validation not null / empty
 	Discount    json.Number `json:"discount" binding:"required,number"` //Validation not null / empty
+}
 
+type UpdateBookRequest struct {
+	Title       string      `json:"title" `                    //Validation not null / empty
+	Price       json.Number `json:"price"`                     //Validation not null / empty & json.number convert string to int
+	Description string      `json:"description"`               //Validation not null / empty
+	Rating      json.Number `json:"rating" binding:"number"`   //Validation not null / empty
+	Discount    json.Number `json:"discount" binding:"number"` //Validation not null / empty
 }

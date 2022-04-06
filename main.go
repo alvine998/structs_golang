@@ -150,11 +150,12 @@ func main() {
 
 	v1.GET("/books", bookHandler.GetBooks)
 	v1.GET("/books/:id", bookHandler.GetBook)
-	v1.GET("/books/:id/:title", bookHandler.BooksHandler2)
-	v1.GET("/query", bookHandler.QueryHandler)
-	v1.GET("/query2", bookHandler.QueryHandler2)
+	v1.PUT("/books/:id", bookHandler.UpdateBook)
+	// v1.GET("/books/:id/:title", bookHandler.BooksHandler2)
+	// v1.GET("/query", bookHandler.QueryHandler)
+	// v1.GET("/query2", bookHandler.QueryHandler2)
 	// Post Data
-	v1.POST("/books", bookHandler.PostBooksHandler)
+	v1.POST("/books", bookHandler.CreateBook)
 
 	router.Run()
 }
