@@ -61,7 +61,7 @@ func QueryHandler2(ctx *gin.Context) {
 
 // Function Post Books
 func PostBooksHandler(ctx *gin.Context) {
-	var bookInput book.BookInput
+	var bookInput book.BookRequest
 	err := ctx.ShouldBindJSON(&bookInput)
 
 	// Error validation

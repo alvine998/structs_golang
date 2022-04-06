@@ -24,6 +24,15 @@ func main() {
 	// Check Print Connection
 	fmt.Println("Database connection succeed")
 
+	bookRepository := book.NewRepository(db)
+	bookService := book.NewService(bookRepository)
+
+	bookRequest := book.BookRequest{
+		Title: "Gundam",
+		Price: "200000",
+	}
+	bookService.Create(bookRequest)
+
 	// Calling name repository
 	// bookRepository := book.NewRepository(db)
 
@@ -156,3 +165,10 @@ func main() {
 
 	router.Run()
 }
+
+// main layer
+// handler layer
+// service layer (Business Logic)
+// repository layer (Berhubungan dengan db)
+// db layer
+// mysql layer
